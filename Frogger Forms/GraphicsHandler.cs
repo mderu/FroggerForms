@@ -76,8 +76,8 @@ namespace frogger
             Content = new ContentManager(Services, "Content");
 
             font = this.Content.Load<SpriteFont>("Segoe");
-            sprites.Add("placeholder", this.Content.Load<Texture2D>("water"));
-            sprites.Add("frog", this.Content.Load<Texture2D>("frog"));
+            sprites.Add("placeholder", this.Content.Load<Texture2D>("placeholder"));
+            sprites.Add("frog", this.Content.Load<Texture2D>("placeholder"));
             sprites.Add("road", this.Content.Load<Texture2D>("road"));
             sprites.Add("water", this.Content.Load<Texture2D>("water"));
             MainForm.player.setSprite("frog");

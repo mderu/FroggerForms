@@ -3,18 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frogger Forms", "Frogger Forms\Frogger Forms.csproj", "{1991D24D-B0E3-446D-901F-103E4F2D9A42}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CBA30CBF-528C-4559-9960-3F2193247830}"
-	ProjectSection(SolutionItems) = preProject
-		..\broke\WindowsFormsApplication1\froggerContent\placeholder.png = ..\broke\WindowsFormsApplication1\froggerContent\placeholder.png
-		..\broke\WindowsFormsApplication1\froggerContent\road.png = ..\broke\WindowsFormsApplication1\froggerContent\road.png
-		..\broke\WindowsFormsApplication1\froggerContent\Segoe.spritefont = ..\broke\WindowsFormsApplication1\froggerContent\Segoe.spritefont
-		..\broke\WindowsFormsApplication1\froggerContent\water.png = ..\broke\WindowsFormsApplication1\froggerContent\water.png
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "froggerContent", "..\broke\WindowsFormsApplication1\froggerContent\froggerContent.contentproj", "{BCCF56F7-266E-4F6B-A057-A8906B8C07E9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentLibrary", "Frogger Forms\ContentLibrary\ContentLibrary.csproj", "{396ADBE6-FB16-4DBA-8C70-C16A46B448EA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -25,12 +13,6 @@ Global
 		{1991D24D-B0E3-446D-901F-103E4F2D9A42}.Debug|x86.Build.0 = Debug|x86
 		{1991D24D-B0E3-446D-901F-103E4F2D9A42}.Release|x86.ActiveCfg = Release|x86
 		{1991D24D-B0E3-446D-901F-103E4F2D9A42}.Release|x86.Build.0 = Release|x86
-		{BCCF56F7-266E-4F6B-A057-A8906B8C07E9}.Debug|x86.ActiveCfg = Debug|x86
-		{BCCF56F7-266E-4F6B-A057-A8906B8C07E9}.Release|x86.ActiveCfg = Release|x86
-		{396ADBE6-FB16-4DBA-8C70-C16A46B448EA}.Debug|x86.ActiveCfg = Debug|x86
-		{396ADBE6-FB16-4DBA-8C70-C16A46B448EA}.Debug|x86.Build.0 = Debug|x86
-		{396ADBE6-FB16-4DBA-8C70-C16A46B448EA}.Release|x86.ActiveCfg = Release|x86
-		{396ADBE6-FB16-4DBA-8C70-C16A46B448EA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

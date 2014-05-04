@@ -83,6 +83,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -94,11 +95,15 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Content\Segoe.spritefont" />
+    <None Include="Resources\Segoe.spritefont" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\placeholder.png" />
     <Content Include="Content\road.png" />
     <Content Include="Content\water.png" />
+    <None Include="Resources\water.png" />
+    <None Include="Resources\road.png" />
+    <None Include="Resources\placeholder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
