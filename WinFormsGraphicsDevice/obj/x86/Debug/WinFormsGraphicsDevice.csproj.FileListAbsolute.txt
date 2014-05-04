@@ -1,0 +1,15 @@
+C:\Users\Ben\Documents\Visual Studio 2010\Projects\FroggerForms\WinFormsGraphicsDevice\obj\x86\Debug\WinFormsGraphicsDevice.csprojResolveAssemblyReference.cache
+C:\Users\Ben\Documents\Visual Studio 2010\Projects\FroggerForms\WinFormsGraphicsDevice\obj\x86\Debug\WinFormsGraphicsDevice.Properties.Resources.resources
+C:\Users\Ben\Documents\Visual Studio 2010\Projects\FroggerForms\WinFormsGraphicsDevice\obj\x86\Debug\WinFormsGraphicsDevice.csproj.GenerateResource.Cache
+C:\Users\Ben\Documents\Visual Studio 2010\Projects\FroggerForms\WinFormsGraphicsDevice\obj\x86\Debug\frogger.MainForm.resources
+C:\Users\Ben\Documents\Visual Studio 2010\Projects\FroggerForms\WinFormsGraphicsDevice\bin\Debug\Content\hudFont.xnb
+C:\Users\Ben\Documents\Visual Studio 2010\Projects\FroggerForms\WinFormsGraphicsDevice\bin\Debug\Content\Segoe.xnb
+C:\Users\Ben\Documents\Visual Studio 2010\Projects\FroggerForms\WinFormsGraphicsDevice\bin\Debug\Content\placeholder.xnb
+C:\Users\Ben\Documents\Visual Studio 2010\Projects\FroggerForms\WinFormsGraphicsDevice\bin\Debug\Content\road.xnb
+C:\Users\Ben\Documents\Visual Studio 2010\Projects\FroggerForms\WinFormsGraphicsDevice\bin\Debug\Content\water.xnb
+C:\Users\Ben\Documents\Visual Studio 2010\Projects\FroggerForms\WinFormsGraphicsDevice\bin\Debug\WinFormsGraphicsDevice.exe
+C:\Users\Ben\Documents\Visual Studio 2010\Projects\FroggerForms\WinFormsGraphicsDevice\bin\Debug\WinFormsGraphicsDevice.pdb
+C:\Users\Ben\Documents\Visual Studio 2010\Projects\FroggerForms\WinFormsGraphicsDevice\bin\Debug\ContentLibrary.dll
+C:\Users\Ben\Documents\Visual Studio 2010\Projects\FroggerForms\WinFormsGraphicsDevice\bin\Debug\ContentLibrary.pdb
+C:\Users\Ben\Documents\Visual Studio 2010\Projects\FroggerForms\WinFormsGraphicsDevice\obj\x86\Debug\WinFormsGraphicsDevice.exe
+C:\Users\Ben\Documents\Visual Studio 2010\Projects\FroggerForms\WinFormsGraphicsDevice\obj\x86\Debug\WinFormsGraphicsDevice.pdb
