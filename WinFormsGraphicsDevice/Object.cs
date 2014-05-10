@@ -21,7 +21,7 @@ namespace frogger
         //all the rows are the same size.
         //
         //But these things need a width.
-        
+
         protected string spriteKey;
         public Object(Vector2 position)
         {
@@ -29,22 +29,10 @@ namespace frogger
             allObjects.Add(this);
         }
         //Added for convience
-        public Object(int x, int y, int w = 64)
+        public Object(int x, int y, int w = MainForm.TileSize)
         {
             this.position = new Vector2(x, y);
             allObjects.Add(this);
-        }
-
-        //class to load content from the main game class
-        public void loadContent(ContentManager content, string asset)
-        {
-            //Deprecated due to spawning new objects
-            //It is impossible to load all of the sprites
-            //at the start of the program into objects, because the
-            //objects get spawned later. Instead, I have decided to
-            //keep the sprites in Game1, with a static 
-            //Map/Dictionary to give newly spawned objects access
-            //to their sprites.
         }
         public void setSprite(string s)
         {
@@ -63,7 +51,7 @@ namespace frogger
         //draw call
         public virtual void draw(SpriteBatch batch)
         {
-            batch.Draw(GraphicsHandler.getSprite(spriteKey), position, Color.White);
+            batch.Draw(MainForm.getSprite(spriteKey), position, Color.White);
         }
         //return position
         public Vector2 getPosition()
@@ -86,7 +74,7 @@ namespace frogger
         }
         public int getWidth()
         {
-            return GraphicsHandler.getSprite(spriteKey).Width;
+            return MainForm.TileSize;
         }
     }
 }

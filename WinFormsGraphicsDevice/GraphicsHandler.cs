@@ -38,7 +38,7 @@ namespace frogger
         //initialize some varaibles here
 
         SpriteBatch spriteBatch;
-        static Dictionary<string, Texture2D> sprites;
+        public static Dictionary<string, Texture2D> sprites;
         SpriteFont font;
         public ContentManager Content;
         BasicEffect effect;
@@ -62,14 +62,14 @@ namespace frogger
 
             frogger.Object.allObjects = new List<frogger.Object>();
             Row.allRows = new List<Row>();
-            new Row(64 * 0, 2.5f);
-            new Row(64 * 1, 2);
-            new Row(64 * 2, 1.5f);
-            new Row(64 * 3, 1, Spawns.LOG);
+            new Row(MainForm.TileSize * 0, 2.5f);
+            new Row(MainForm.TileSize * 1, 2);
+            new Row(MainForm.TileSize * 2, 1.5f);
+            new Row(MainForm.TileSize * 3, 1, Spawns.LOG);
             MainForm.score = 0;
             MainForm.lives = MainForm.startingLives;
             //put the player at the bottom of the screen
-            MainForm.player = new Player(new Vector2(200, 256));
+            MainForm.player = new Player(new Vector2(MainForm.startingX, MainForm.startingY), MainForm.startingLives);
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
 

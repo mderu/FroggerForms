@@ -7,17 +7,18 @@ using Microsoft.Xna.Framework.Graphics;
 namespace frogger
 {
     //Go ahead and rename Spawns if you like, it was late at 
-    public enum Spawns { GATOR = 0, LOG = 1, CAR = 2, FREESPACE = 3}
+    public enum Spawns { GATOR = 0, LOG = 1, CAR = 2, FREESPACE = 3 }
     class Row : frogger.Object
     {
         public List<Object> objects;
         public static List<Row> allRows;
-        
+
         //in pixels per update (1/60th a second)
         float speed;
         Spawns type;
 
-        public Row(int y, float speed, Spawns tipe = Spawns.CAR) : base(0, y)
+        public Row(int y, float speed, Spawns tipe = Spawns.CAR)
+            : base(new Vector2(0, y))
         {
             objects = new List<Object>();
             allRows.Add(this);
@@ -30,28 +31,38 @@ namespace frogger
             }
             //Here we set up the row so it is already populated
             //This one is optimized for cars
-            for (int i = MainForm.rand.Next() % 250; i < MainForm.width; i += MainForm.rand.Next() % 250 + 64 * 2)
+            //don't spawn any objects if its a safe row
+            if (type != Spawns.FREESPACE)
             {
-                objects.Add(new Object(i, y));
-                setObjectSprite();
+                for (int i = MainForm.rand.Next() % 250; i < MainForm.width; i += MainForm.rand.Next() % 250 + MainForm.TileSize * 2)
+                {
+                    objects.Add(new Object(i, y));
+                    setObjectSprite();
+                }
             }
 
         }
         private void addObject()
         {
-            if ((speed > 0 && objects[objects.Count - 1].getPosition().X > 0)
-                ||
-                 (speed < 0 && objects[objects.Count - 1].getPosition().X + objects[objects.Count - 1].getWidth() > MainForm.width))
+            if (speed != 0)
             {
-                objects.Add(new Object(speed < 0 ? MainForm.width : 0, (int)position.Y));
-                setObjectSprite();
-                objects[objects.Count - 1].moveBy(-objects[objects.Count - 1].getWidth(), 0);
+                if (objects.Count == 0
+                    ||
+                    (speed > 0 && objects[objects.Count - 1].getPosition().X > 0)
+                    ||
+                     (speed < 0 && objects[objects.Count - 1].getPosition().X + objects[objects.Count - 1].getWidth() > MainForm.TileSize))
+                {
+                    objects.Add(new Object(speed < 0 ? MainForm.TileSize : 0, (int)position.Y));
+                    setObjectSprite();
+                    objects[objects.Count - 1].moveBy(-objects[objects.Count - 1].getWidth(), 0);
+                }
             }
         }
+
         public override void update(float time = .01666f)
         {
             bool createObject = true;
-            
+
             if (objects.Count < 4)
             {
                 addObject();
@@ -68,7 +79,7 @@ namespace frogger
                     continue;
                 }
                 //Deletes all logs/cars at the end of the screen (if moving right)
-                else if (speed > 0 && objects[i].getPosition().X > MainForm.width)
+                else if (speed > 0 && objects[i].getPosition().X > MainForm.TileSize)
                 {
                     objects.RemoveAt(i);
                     objects.TrimExcess();
@@ -81,7 +92,7 @@ namespace frogger
                     //we cannot create a new log without them overlapping.
                     createObject = false;
                 }
-                else if (speed < 0 && objects[i].getPosition().X + objects[i].getWidth() > MainForm.width)
+                else if (speed < 0 && objects[i].getPosition().X + objects[i].getWidth() > MainForm.TileSize)
                 {
                     //Same as previous, except the opposite way.
                     createObject = false;
@@ -109,15 +120,17 @@ namespace frogger
             }
             return false;*/
         }
+
         //we have to ovveride the setposition call so that objects are taken into accout
         public override void setPosition(Vector2 newPosition)
         {
             position = newPosition;
             for (int i = 0; i < objects.Count; i++)
             {
-                objects[i].setPosition(objects[i].getPosition() + new Vector2(0, 64));
+                objects[i].setPosition(objects[i].getPosition() + new Vector2(0, MainForm.TileSize));
             }
         }
+
         public void drawRow(SpriteBatch batch)
         {
             //draw tile first
@@ -126,8 +139,8 @@ namespace frogger
                 for (int i = 0; i < 13; i++)
                 {
                     Vector2 p = position;
-                    p.X += 64 * i;
-                    batch.Draw(GraphicsHandler.getSprite("road"), p, Color.White);
+                    p.X += MainForm.TileSize * i;
+                    batch.Draw(MainForm.getSprite("road"), p, Color.White);
                 }
             }
             if (type == Spawns.LOG || type == Spawns.GATOR)
@@ -135,15 +148,15 @@ namespace frogger
                 for (int i = 0; i < 13; i++)
                 {
                     Vector2 p = position;
-                    p.X += 64 * i;
-                    batch.Draw(GraphicsHandler.getSprite("water"), p, Color.White);
+                    p.X += MainForm.TileSize * i;
+                    batch.Draw(MainForm.getSprite("water"), p, Color.White);
                 }
             }
             for (int i = 0; i < objects.Count; i++)
             {
                 objects[i].draw(batch);
             }
-            
+
         }
 
         //some return funciotns
@@ -151,10 +164,17 @@ namespace frogger
         {
             return speed;
         }
+
         public bool isWater()
         {
             return type <= Spawns.LOG;
         }
+
+        public bool isSafe()
+        {
+            return type <= Spawns.CAR;
+        }
+
         private void setObjectSprite()
         {
             switch (type)

@@ -3,3 +3,10 @@ Content\Segoe.xnb
 Content\placeholder.xnb
 Content\road.xnb
 Content\water.xnb
+Content\blueCar.xnb
+Content\blueCarBen.xnb
+Content\frog.xnb
+Content\greyCar.xnb
+Content\lily.xnb
+Content\redCar.xnb
+Content\redCarBen.xnb

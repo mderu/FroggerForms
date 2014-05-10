@@ -16,10 +16,20 @@ namespace frogger
     public class Player : frogger.Object
     {
         protected bool wKeyUp;
-        public Player(Vector2 position)
+        protected bool dead;
+        protected int lives;
+        protected int numSteps;
+        protected int lastSaveRow;
+
+
+        public Player(Vector2 position, int startingLives)
             : base(position)
         {
             wKeyUp = true;
+            dead = false;
+            numSteps = 0;
+            lastSaveRow = 5;
+            lives = startingLives;
         }
 
         //player update should take kinect input
@@ -32,34 +42,38 @@ namespace frogger
             {
                 if (Row.allRows[i].objectInRow(this))
                 {
+                    if (Row.allRows[i].isSafe())
+                    {
+                        lastSaveRow = i;
+                    }
                     bool hitObject = false;
-                    for (int j = 0; j < Row.allRows[i].objects.Count(); j++ )
+                    for (int j = 0; j < Row.allRows[i].objects.Count(); j++)
                     {
                         //This isn't entirely copy pasta, I had to change conditions slightly
                         //It also adds in a failsafe if we want to be lazy.
                         //We can spawn logs in one after the other, making it look like a
                         //continuous, long log, and frogger is capable of walking across them.
                         if (Row.allRows[i].isWater() && (Row.allRows[i].objects[j].getCollisionWithObjectTolerances(position, 32) ||
-                                    (Row.allRows[i].objects[j].getCollisionWithObject(position) && 
+                                    (Row.allRows[i].objects[j].getCollisionWithObject(position) &&
                                     (j + 1 < Row.allRows[i].objects.Count() && (Row.allRows[i].objects[j + 1].getCollisionWithObject(position)) ||
-                                         (j-1 > 0 && (Row.allRows[i].objects[j - 1].getCollisionWithObject(position))))
+                                         (j - 1 > 0 && (Row.allRows[i].objects[j - 1].getCollisionWithObject(position))))
                                     )
                                 )
                             )
-
                         {
                             hitObject = true;
                             break;
                         }
-                        else if (!Row.allRows[i].isWater() && 
-                                ((Row.allRows[i].objects[j].getCollisionWithObjectTolerances(position,5)) ||
+                        else if (!Row.allRows[i].isWater() &&
+                                ((Row.allRows[i].objects[j].getCollisionWithObjectTolerances(position, 5)) ||
                                 (Row.allRows[i].objects[j].getCollisionWithObjectTolerances(position, 59)))
                             )
                         {
                             //if !water, then they just hit a car.
                             //Which is bad, so set game over
                             hitObject = true;
-                            playerReset();
+                            //playerReset();
+                            dead = true;
                             break;
                         }
                     }
@@ -68,12 +82,15 @@ namespace frogger
                         //If they did not hit an object and the row is water
                         //they just lost, because a frog that lived his whole
                         //tadpole life in water is unable to swim.
-                        position.Y += 64*5;
+                        //position.Y += 64*5;
+                        //playerReset();
+                        dead = true;
                     }
                     if (Row.allRows[i].isWater())
                     {
                         this.moveBy(Row.allRows[i].getSpeed() * (int)(time * 60f), 0);
                     }
+
                 }
             }
             KeyboardState kb = Keyboard.GetState();
@@ -81,15 +98,16 @@ namespace frogger
             {
                 position.X -= 5;
             }
-            else if(kb.IsKeyDown(Keys.D))
+            else if (kb.IsKeyDown(Keys.D))
             {
                 position.X += 5;
             }
             if (kb.IsKeyDown(Keys.W) && wKeyUp)
             {
                 //make sure player can only go row by row
-                //64 pixel increments
-                position.Y -= 64;
+                //MainForm.TileSize pixel increments
+                position.Y -= MainForm.TileSize;
+                numSteps++;
                 wKeyUp = false;
             }
             else if (kb.IsKeyUp(Keys.W))
@@ -102,11 +120,31 @@ namespace frogger
         public void playerReset()
         {
             //reset player position
-            position.Y += 64 * 5;
+            position.Y = MainForm.TileSize * lastSaveRow;
             position.X = 200;
+            lives--;
+            dead = false;
+        }
+
+        public int getLives()
+        {
+            return lives;
+        }
+
+        public int getNumSteps()
+        {
+            return numSteps;
+        }
+
+        public bool isDead()
+        {
+            return dead;
+        }
+
+        public void setlastSaveRow(int row)
+        {
+            lastSaveRow = row;
         }
     }
-
-
 }
 
