@@ -32,12 +32,12 @@ namespace frogger
     public partial class MainForm : System.Windows.Forms.Form
     {
         public static Player player;
-        public const int width = 800;
+        public const int width = 1280;
         public const int height = 600;
         public const int startingLives = 5;
         public const int startingX = 200;
-        public const int startingY = 256;
-        public const int MAX_SPEED = 3;
+        public const int startingY = 258;
+        public const double MAX_SPEED = .75;
         public const int TileSize = 128;
         private int top;
 
@@ -72,6 +72,7 @@ namespace frogger
 
             if (player.getPosition().X + TileSize < 0 || player.getPosition().X > width || player.isDead())
             {
+
                 //player just died
                 reset();
             }
@@ -120,8 +121,7 @@ namespace frogger
 
         public float getRandomSpeed()
         {
-            Random rnd = new Random();
-            float speed = (float)((rnd.NextDouble() * (MAX_SPEED * 2)) - MAX_SPEED);
+            float speed = (float)((rand.NextDouble() * (MAX_SPEED * 2)) - MAX_SPEED);
             return speed;
         }
 

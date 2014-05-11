@@ -77,9 +77,14 @@ namespace frogger
 
             font = this.Content.Load<SpriteFont>("Segoe");
             sprites.Add("placeholder", this.Content.Load<Texture2D>("placeholder"));
-            sprites.Add("frog", this.Content.Load<Texture2D>("placeholder"));
+            sprites.Add("frog", this.Content.Load<Texture2D>("frog"));
             sprites.Add("road", this.Content.Load<Texture2D>("road"));
             sprites.Add("water", this.Content.Load<Texture2D>("water"));
+            sprites.Add("blueCarBen", this.Content.Load<Texture2D>("blueCarBen"));
+            sprites.Add("redCarBen", this.Content.Load<Texture2D>("redCarBen"));
+            sprites.Add("blueCar", this.Content.Load<Texture2D>("blueCar"));
+            sprites.Add("redCar", this.Content.Load<Texture2D>("redCar"));
+            sprites.Add("greyCar", this.Content.Load<Texture2D>("greyCar"));
             MainForm.player.setSprite("frog");
 
             timer = Stopwatch.StartNew();

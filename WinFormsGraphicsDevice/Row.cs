@@ -18,7 +18,7 @@ namespace frogger
         Spawns type;
 
         public Row(int y, float speed, Spawns tipe = Spawns.CAR)
-            : base(new Vector2(0, y))
+            : base(new Vector2(0, y), "")
         {
             objects = new List<Object>();
             allRows.Add(this);
@@ -36,8 +36,7 @@ namespace frogger
             {
                 for (int i = MainForm.rand.Next() % 250; i < MainForm.width; i += MainForm.rand.Next() % 250 + MainForm.TileSize * 2)
                 {
-                    objects.Add(new Object(i, y));
-                    setObjectSprite();
+                    objects.Add(new Object(i, y, getSpriteName()));
                 }
             }
 
@@ -52,14 +51,13 @@ namespace frogger
                     ||
                      (speed < 0 && objects[objects.Count - 1].getPosition().X + objects[objects.Count - 1].getWidth() > MainForm.TileSize))
                 {
-                    objects.Add(new Object(speed < 0 ? MainForm.TileSize : 0, (int)position.Y));
-                    setObjectSprite();
-                    objects[objects.Count - 1].moveBy(-objects[objects.Count - 1].getWidth(), 0);
+                    objects.Add(new Object(speed < 0 ? MainForm.width : 0, (int)position.Y, getSpriteName()));
+                    //objects[objects.Count - 1].moveBy(-objects[objects.Count - 1].getWidth(), 0);
                 }
             }
         }
 
-        public override void update(float time = .01666f)
+        public override void update(float time)
         {
             bool createObject = true;
 
@@ -79,7 +77,7 @@ namespace frogger
                     continue;
                 }
                 //Deletes all logs/cars at the end of the screen (if moving right)
-                else if (speed > 0 && objects[i].getPosition().X > MainForm.TileSize)
+                else if (speed > 0 && objects[i].getPosition().X + MainForm.TileSize> MainForm.width)
                 {
                     objects.RemoveAt(i);
                     objects.TrimExcess();
@@ -92,13 +90,13 @@ namespace frogger
                     //we cannot create a new log without them overlapping.
                     createObject = false;
                 }
-                else if (speed < 0 && objects[i].getPosition().X + objects[i].getWidth() > MainForm.TileSize)
+                else if (speed < 0 && objects[i].getPosition().X + objects[i].getWidth() > MainForm.width)
                 {
                     //Same as previous, except the opposite way.
                     createObject = false;
                 }
 
-                objects[i].moveBy(speed * (int)(time * 60f), 0);
+                objects[i].moveBy(speed * time, 0);
 
             }
             if (createObject && MainForm.rand.NextDouble() < .005 * Math.Abs(speed))
@@ -175,22 +173,39 @@ namespace frogger
             return type <= Spawns.CAR;
         }
 
-        private void setObjectSprite()
+        public string getSpriteName()
         {
             switch (type)
             {
                 case Spawns.CAR:
-                    objects[objects.Count - 1].setSprite("placeholder");
+                    int tmp = MainForm.rand.Next(2000);
+                    if (tmp == 0)
+                    {
+                        return "blueCarBen";
+                    }
+                    else if (tmp <= 667)
+                    {
+                        return "blueCar";
+                    }
+                    else if (tmp == 2000)
+                    {
+                        return "redCarBen";
+                    }
+                    else if (tmp <= 1334)
+                    {
+                        return "redCar";
+                    }
+                    else
+                    {
+                        return "greyCar";
+                    }
                     break;
                 case Spawns.GATOR:
-                    objects[objects.Count - 1].setSprite("placeholder");
-                    break;
+                    return "placeholder";
                 case Spawns.LOG:
-                    objects[objects.Count - 1].setSprite("placeholder");
-                    break;
+                    return "placeholder";
                 default:
-                    objects[objects.Count - 1].setSprite("placeholder");
-                    break;
+                    return "placeholder";
 
             }
         }

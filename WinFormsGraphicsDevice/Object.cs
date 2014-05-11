@@ -23,15 +23,17 @@ namespace frogger
         //But these things need a width.
 
         protected string spriteKey;
-        public Object(Vector2 position)
+        public Object(Vector2 position, string s)
         {
             this.position = position;
+            spriteKey = s;
             allObjects.Add(this);
         }
         //Added for convience
-        public Object(int x, int y, int w = MainForm.TileSize)
+        public Object(int x, int y, string s)
         {
             this.position = new Vector2(x, y);
+            spriteKey = s;
             allObjects.Add(this);
         }
         public void setSprite(string s)
@@ -39,7 +41,7 @@ namespace frogger
             spriteKey = s;
         }
 
-        public virtual void update(float time = .01666f)
+        public virtual void update(float time)
         {
             //we can check collisions here
         }

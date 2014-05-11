@@ -23,7 +23,7 @@ namespace frogger
 
 
         public Player(Vector2 position, int startingLives)
-            : base(position)
+            : base(position, "frog")
         {
             wKeyUp = true;
             dead = false;
@@ -88,7 +88,7 @@ namespace frogger
                     }
                     if (Row.allRows[i].isWater())
                     {
-                        this.moveBy(Row.allRows[i].getSpeed() * (int)(time * 60f), 0);
+                        this.moveBy(Row.allRows[i].getSpeed() * (int)(time), 0);
                     }
 
                 }
@@ -96,11 +96,11 @@ namespace frogger
             KeyboardState kb = Keyboard.GetState();
             if (kb.IsKeyDown(Keys.A))
             {
-                position.X -= 5;
+                position.X -= 10;
             }
             else if (kb.IsKeyDown(Keys.D))
             {
-                position.X += 5;
+                position.X += 10;
             }
             if (kb.IsKeyDown(Keys.W) && wKeyUp)
             {
