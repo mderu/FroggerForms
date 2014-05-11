@@ -62,10 +62,10 @@ namespace frogger
 
             frogger.Object.allObjects = new List<frogger.Object>();
             Row.allRows = new List<Row>();
-            new Row(MainForm.TileSize * 0, 2.5f);
-            new Row(MainForm.TileSize * 1, 2);
-            new Row(MainForm.TileSize * 2, 1.5f);
-            new Row(MainForm.TileSize * 3, 1, Spawns.LOG);
+            new Row(MainForm.TileSize * 0, 2.5f/30f);
+            new Row(MainForm.TileSize * 1, 2 / 30f);
+            new Row(MainForm.TileSize * 2, 1.5f / 30f);
+            new Row(MainForm.TileSize * 3, 1 / 30f, Spawns.LOG);
             MainForm.score = 0;
             MainForm.lives = MainForm.startingLives;
             //put the player at the bottom of the screen

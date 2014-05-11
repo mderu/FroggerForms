@@ -39,6 +39,7 @@ namespace frogger
             this.spinningTriangleControl.Size = new System.Drawing.Size(792, 573);
             this.spinningTriangleControl.TabIndex = 0;
             this.spinningTriangleControl.Text = "spinningTriangleControl";
+            this.spinningTriangleControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.spinningTriangleControl_MouseMove);
             // 
             // MainForm
             // 

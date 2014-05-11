@@ -33,11 +33,11 @@ namespace frogger
     {
         public static Player player;
         public const int width = 1280;
-        public const int height = 600;
+        public const int height = 900;
         public const int startingLives = 5;
         public const int startingX = 200;
         public const int startingY = 258;
-        public const double MAX_SPEED = .75;
+        public const double MAX_SPEED = .50;
         public const int TileSize = 128;
         private int top;
 
@@ -45,6 +45,11 @@ namespace frogger
         public static int lives;
         public const int gameTime = 16;
         public static Random rand = new Random();
+
+        bool inUpDownZone = false;
+        float playerSpeed = 0;
+        int ticksInXZone = 0;
+        bool inXZone = false;
 
         public static System.Timers.Timer updater;
 
@@ -67,14 +72,22 @@ namespace frogger
             }
 
             player.update(gameTime);
+            player.moveBy(playerSpeed, 0);
             //So here we should check if the player has reached a certain height
             checkHeight();
 
             if (player.getPosition().X + TileSize < 0 || player.getPosition().X > width || player.isDead())
             {
-
                 //player just died
                 reset();
+            }
+            if (inXZone)
+            {
+                ticksInXZone++;
+                if (ticksInXZone >= 60)
+                {
+                    Application.Exit();
+                }
             }
         }
         protected void reset()
@@ -112,10 +125,10 @@ namespace frogger
             //generate a new starting level
             Row.allRows = new List<Row>();
             //generateChunk();
-            new Row(TileSize * 0, 2.5f, Spawns.CAR);
-            new Row(TileSize * 1, 0.5f, Spawns.CAR);
-            new Row(TileSize * 2, -2.5f, Spawns.LOG);
-            new Row(TileSize * 3, 1.0f, Spawns.CAR);
+            new Row(TileSize * 0, getRandomSpeed(), Spawns.CAR);
+            new Row(TileSize * 1, getRandomSpeed(), Spawns.CAR);
+            new Row(TileSize * 2, getRandomSpeed(), Spawns.LOG);
+            new Row(TileSize * 3, getRandomSpeed(), Spawns.CAR);
             top = 0;
         }
 
@@ -171,6 +184,42 @@ namespace frogger
         public static Texture2D getSprite(string s)
         {
             return GraphicsHandler.sprites[s];
+        }
+
+        private void spinningTriangleControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.X < MainForm.width / 3)
+            {
+                playerSpeed = (e.X - MainForm.width / 3) / 50;
+            }
+            else if (e.X > 2 * MainForm.width / 3)
+            {
+                playerSpeed = (e.X - 2 * MainForm.width / 3) / 50;
+            }
+            if (e.Y < MainForm.height / 3)
+            {
+                if (!inUpDownZone)
+                {
+                    player.moveBy(0, -MainForm.TileSize);
+                }
+                inUpDownZone = true;
+            }
+            else if (e.Y > 2 * MainForm.height / 3)
+            {
+                if (!inUpDownZone)
+                {
+                    player.moveBy(0, MainForm.TileSize);
+                }
+                inUpDownZone = true;
+            }
+            else
+            {
+                inXZone = inUpDownZone = false;
+            }
+            if (e.Y < 100 && e.X > MainForm.width - 100)
+            {
+                inXZone = true;
+            }
         }
     }
 
